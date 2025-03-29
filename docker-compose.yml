@@ -8,14 +8,8 @@ services:
       - 8080:80
     expose:
       - 80
-    environment:
-      YOURLS_SITE: https://myyourls.example.com # please adjust to your domain
-      YOURLS_USER: yourls-admin # please adjust
-      YOURLS_PASS: very-secury-admin-password # please adjust
-      YOURLS_DB_HOST: mysql
-      YOURLS_DB_USER: yourls
-      YOURLS_DB_NAME: yourls
-      YOURLS_DB_PASS: very-secure-database-password # please adjust
+    env_file:
+      - .env
     volumes:
       - ./security.conf:/etc/apache2/conf-enabled/security.conf:ro      
     #networks:
@@ -34,13 +28,10 @@ services:
     restart: unless-stopped
     expose:
       - 3306
-    environment:
-      MYSQL_DATABASE: yourls
-      MYSQL_USER: yourls
-      MYSQL_PASSWORD: very-secure-database-password # please adjust
-      MYSQL_ROOT_PASSWORD: very-secure-database-root-password # please adjust
+    env_file:
+      - .env
     volumes:
-      - ${DOCKER_VOLUME_STORAGE:-/mnt/docker-volumes}/yourls/mysql:/var/lib/mysql
+      - ./yourls_db:/var/lib/mysql
     #networks:
     #  - proxy
 
