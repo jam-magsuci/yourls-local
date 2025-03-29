@@ -13,8 +13,8 @@ services:
     volumes:
       - ./security.conf:/etc/apache2/conf-enabled/security.conf:ro
       - yourls_data:/var/www/html/
-    #networks:
-    #  - proxy
+    networks:
+     - localnet
     #labels:
     #  - traefik.enable=true
     #  - traefik.http.routers.yourls.rule=Host(`s.ptf.one`)
@@ -33,12 +33,13 @@ services:
       - .env
     volumes:
       - yourls_db:/var/lib/mysql
-    #networks:
-    #  - proxy
+    networks:
+     - localnet
 
-#networks:
-#  proxy:
-#    external: true
+networks:
+ localnet:
+   external: true
+
 volumes:
   yourls_db:
   yourls_data:
