@@ -12,7 +12,7 @@ services:
       - .env
     volumes:
       - ./security.conf:/etc/apache2/conf-enabled/security.conf:ro
-      - ./yourls_data:/var/www/html/
+      - yourls_data:/var/www/html/
     #networks:
     #  - proxy
     #labels:
@@ -32,10 +32,13 @@ services:
     env_file:
       - .env
     volumes:
-      - ./yourls_db:/var/lib/mysql
+      - yourls_db:/var/lib/mysql
     #networks:
     #  - proxy
 
 #networks:
 #  proxy:
 #    external: true
+volumes:
+  yourls_db:
+  yourls_data:
